@@ -1,11 +1,16 @@
 from django.shortcuts import redirect, render
 
+from recipe.models import Recipe
+
 
 from .forms import SignupForm
 
 
 def index(request):
-    return render(request, 'core/index.html')
+    recipe_set = Recipe.objects.all()[:5]
+
+    return render(request, 'core/index.html',
+                  {'recipe_set': recipe_set})
 
 
 def signup(request):
