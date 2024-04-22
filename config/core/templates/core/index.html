@@ -8,13 +8,13 @@
   <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
     <h2 class="text-2xl text-center">Рецепты</h2>
   </div>
-  <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
-    <div class="bg-gray-100 rounded-xl">
-      <div>
-        {% for recipe in recipe_set %}
-          <div>
-            {# prettier-ignore #}
-            <a href="{% url 'recipe:detail' recipe.id %}">
+
+  <div>
+    {% for recipe in recipe_set %}
+      <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
+        <div>
+          {# prettier-ignore #}
+          <a href="{% url 'recipe:detail' recipe.id %}">
               <div>
                 <img src="{{ recipe.image.url }}" class="rounded-xl mx-auto img-fluid" style="height: 320px;width: 3200px;object-fit: cover" />
               </div>
@@ -27,9 +27,8 @@
                 <h2 class="text-2xl">{{ recipe.steps }}</h2>
               </div>
             </a>
-          </div>
-        {% endfor %}
+        </div>
       </div>
-    </div>
+    {% endfor %}
   </div>
 {% endblock %}
