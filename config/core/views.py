@@ -7,7 +7,7 @@ from .forms import SignupForm
 
 
 def index(request):
-    recipe_set = Recipe.objects.all()[:5]
+    recipe_set = Recipe.objects.order_by('-created_at')[:5]
 
     return render(request, 'core/index.html',
                   {'recipe_set': recipe_set})

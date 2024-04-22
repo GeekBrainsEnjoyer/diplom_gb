@@ -1,20 +1,21 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-  Cookbook
+  Мои рецепты
 {% endblock %}
 
 {% block content %}
   <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
-    <h2 class="text-2xl text-center">Рецепты</h2>
+    <h2 class="text-2xl text-center">Мои рецепты</h2>
   </div>
 
   <div>
-    {% for recipe in recipe_set %}
-      <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
-        <div>
-          {# prettier-ignore #}
-          <a href="{% url 'recipe:detail' recipe.id %}">
+    {% if recipe_set %}
+      {% for recipe in recipe_set %}
+        <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
+          <div>
+            {# prettier-ignore #}
+            <a href="{% url 'recipe:detail' recipe.id %}">
               <div>
                 <img src="{{ recipe.image.url }}" class="rounded-xl mx-auto img-fluid" style="height: 320px;width: 3200px;object-fit: cover" />
               </div>
@@ -30,8 +31,11 @@
                 <p>@{{recipe.created_by}}</p>
               </div>
             </a>
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    {% else %}
+      <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">Пока пусто</div>
+    {% endif %}
   </div>
 {% endblock %}
