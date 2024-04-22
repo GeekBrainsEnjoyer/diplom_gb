@@ -1,12 +1,31 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-  Cookbook
+  Browse
 {% endblock %}
 
 {% block content %}
   <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
-    <h2 class="text-2xl text-center">Рецепты</h2>
+    <h2 class="text-2xl text-center">Поиск</h2>
+  </div>
+
+  <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
+    <p class="font-semibold">Категории</p>
+
+    <ul class="grid grid-flow-col">
+      {% for category in category_set %}
+        <li class="py-4 rounded-xl{% if category.id == category_id %}{% endif %}">
+          <a class="text-green-900 p-1 border border-green-300 rounded-xl" href="{% url 'recipe:browse' %}?query={{ query }}&category={{ category.id }}">{{ category.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <div>
+      <form class="grid grid-flow-col" method="get" action="{% url 'recipe:browse' %}">
+        <input name="query" class="col-span-3 w-full p-2 border rounded-xl" type="text" value="{{ query }}" placeholder="Найти ..." />
+
+        <button class="p-2 text-lg font-semibold bg-green-700 text-white rounded-xl hover:bg-gray-500">Найти</button>
+      </form>
+    </div>
   </div>
 
   <div>

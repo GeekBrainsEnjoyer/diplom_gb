@@ -10,28 +10,28 @@
   </div>
   <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
     <div>
-      <img src="{{ recipe.image.url }}" class="rounded-xl mx-auto img-fluid" style="object-fit: cover" />
+      <img src="{{ recipe.image.url }}" class="rounded-xl mx-auto img-fluid" style="width: 3200px;object-fit:cover" />
     </div>
 
     <div class="p-6">
-      <h2 class="text-2xl">Время приготовления</h2>
-      <h2 class="text-2xl">{{ recipe.cooking_time }}</h2>
-      <h2 class="text-2xl">Шаги приготовления</h2>
-      <h2 class="text-2xl">{{ recipe.steps }}</h2>
+      <h2 class="text-xl">Время приготовления: {{ recipe.cooking_time }}</h2>
+      <h2 class="text-xl py-4 text-gray-800">Описание:</h2>
+      <p class="text-l text-gray-700">{{ recipe.description }}</p>
+      <h2 class="text-xl py-4 text-gray-800">Шаги приготовления:</h2>
+      <p class="text-l text-gray-700">{{ recipe.steps }}</p>
     </div>
   </div>
+
   <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
+    <p class="text-l text-gray-700 pb-6 px-3">Автор: @{{ recipe.created_by }}</p>
     {% if request.user == recipe.created_by %}
-      <div class="col-span-2 p-6 bg-gray-200 rounded-xl">
-        <p>Это ваш рецепт</p><br />
-        {# prettier-ignore #}
-        <a href="{% url 'recipe:edit_recipe' recipe.id %}" class="px-3 py-2 text-lg font-semibold bg-green-700 text-white rounded-xl">Изменить</a>
-        {# prettier-ignore #}
-        <a href="{% url 'recipe:delete_recipe' recipe.id %}" class="px-3 py-2 text-lg font-semibold bg-red-700 text-white rounded-xl">УДАЛИТЬ</a>
-      </div>
+      {# prettier-ignore #}
+      <a href="{% url 'recipe:edit_recipe' recipe.id %}" class="px-3 py-2 text-lg font-semibold bg-green-700 text-white rounded-xl">Изменить</a>
+      {# prettier-ignore #}
+      <a href="{% url 'recipe:delete_recipe' recipe.id %}" class="px-3 py-2 text-lg font-semibold bg-red-700 text-white rounded-xl">УДАЛИТЬ</a>
     {% else %}
       {# prettier-ignore #}
-      <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact seller</a>
+      <a href="#" class="px-3 py-2 text-lg font-semibold bg-green-700 text-white rounded-xl">Написать автору</a>
     {% endif %}
   </div>
 {% endblock %}

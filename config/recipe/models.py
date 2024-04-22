@@ -16,7 +16,6 @@ class Recipe(models.Model):
     steps = models.TextField(blank=True, null=True)
     cooking_time = models.CharField(max_length=32, blank=True, null=True)
     image = models.ImageField(upload_to='recipe_images', blank=True, null=True)
-    is_healthy = models.BooleanField(default=False)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 

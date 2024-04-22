@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from .models import Recipe
+from .models import Recipe, Category
+from django.db.models import Q
 
 
 from .forms import RecipeForm
@@ -10,6 +11,23 @@ def detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     return render(request, 'recipe/detail.html', {
         'recipe': recipe})
+
+
+def browse(request):
+    query = request.GET.get('query', '')
+    category_id = request.GET.get('category', 0)
+    recipe_set = Recipe.objects.all()
+    category_set = Category.objects.all()
+
+    if category_id:
+        recipe_set = recipe_set.filter(category_id=category_id)
+
+    if query:
+        recipe_set = recipe_set.filter(Q(name__icontains=query) | Q(
+            description__icontains=query) | Q(steps__icontains=query))
+
+    return render(request, 'recipe/browse.html', {
+        'category_set': category_set, 'recipe_set': recipe_set, 'category_id': int(category_id)})
 
 
 @login_required

@@ -10,7 +10,7 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ('category', 'name', 'description', 'steps',
-                  'cooking_time', 'is_healthy', 'image')
+                  'cooking_time', 'image')
         widgets = {
             'category':  forms.Select(attrs={
                 'class': INPUT_CLASSES
@@ -31,7 +31,6 @@ class RecipeForm(forms.ModelForm):
                 'placeholder': "Напишите примерное время приговления.",
                 'class': INPUT_CLASSES
             }),
-            'is_healthy': forms.CheckboxInput(),
             'image': forms.FileInput(attrs={
                 'class': INPUT_CLASSES
             })
