@@ -8,4 +8,7 @@ urlpatterns = [
     path('', include('core.urls')),
     path('recipe/', include('recipe.urls')),
     path(route='dashboard', view=include('dashboard.urls')),
+    path('chats/', include('chat.urls')),
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
