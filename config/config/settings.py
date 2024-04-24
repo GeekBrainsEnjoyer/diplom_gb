@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'recipe',
     'dashboard',
     'chat',
+    'comments',
 ]
 
 MIDDLEWARE = [

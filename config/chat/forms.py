@@ -7,5 +7,8 @@ class ChatMessageForm(forms.ModelForm):
     class Meta:
         model = ChatMessage
         fields = ('message', )
-
-    message = forms.Textarea(attrs={'class': 'w-full py-2 px-7 rounded-xl'})
+        widgets = {
+            'message': forms.Textarea(attrs={
+                'class': "w-full h-12  p-3 border border-gray-300 rounded-xl",
+                'placeholder': 'Введите сообщение...',})
+        }

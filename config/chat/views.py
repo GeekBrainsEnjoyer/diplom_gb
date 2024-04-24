@@ -16,7 +16,7 @@ def new_chat(request, recipe_pk):
     if recipe.created_by == request.user:
         return redirect('dashboard:index')
 
-    chats = Chat.objects.filter(recipe=recipe).filter(
+    chats = Chat.objects.filter().filter(
         users__in=[request.user.id])
 
     if chats:
@@ -26,7 +26,7 @@ def new_chat(request, recipe_pk):
         form = ChatMessageForm(request.POST)
 
         if form.is_valid():
-            chat = Chat.objects.create(recipe=recipe)
+            chat = Chat.objects.create()
             chat.users.add(request.user)
             chat.users.add(recipe.created_by)
             chat.save()

@@ -21,7 +21,7 @@
     </ul>
     <div>
       <form class="grid grid-flow-col" method="get" action="{% url 'recipe:browse' %}">
-        <input name="query" class="col-span-3 w-full p-2 border rounded-xl" type="text" value="{{ query }}" placeholder="Найти ..." />
+        <input name="query" class="col-span-8 w-full p-2 border rounded-xl" type="text" value="{{ query }}" placeholder="Найти ..." />
 
         <button class="p-2 text-lg font-semibold bg-green-700 text-white rounded-xl hover:bg-gray-500">Найти</button>
       </form>
@@ -34,19 +34,21 @@
         <div>
           {# prettier-ignore #}
           <a href="{% url 'recipe:detail' recipe.id %}">
-              <div>
-                <img src="{{ recipe.image.url }}" class="rounded-xl mx-auto img-fluid" style="height: 320px;width: 3200px;object-fit: cover" />
-              </div>
+            <div class="grid grid-flow-col">
 
-              <div class="p-6">
-                <h2 class="text-2xl text-center pb-6">{{ recipe.name }}</h2>
-                <h2 class="text-xl pb-4 text-gray-800">Описание:</h2>
-                <p class="text-l text-gray-700">{{ recipe.description }}</p>
+              <div class="col-span-1">
+                <img src="{{ recipe.image.url }}" class="rounded-xl mx-auto img-fluid" style="height: 160x;width: max;object-fit: cover" />
               </div>
-
-              <div class="text-l text-gray-700 text-right">
-                @{{recipe.created_by}}
+              
+              <div class="px-3 col-span-3">
+                <p class="text-l text-center p-2">{{ recipe.name }}</p>
+                <p class="text-s text-gray-700">{{ recipe.description|slice:100 }}...</p>
+                <div class="text-l text-gray-700 text-right">
+                  @{{recipe.created_by}}
+                </div>
               </div>
+              
+            </div>
             </a>
         </div>
       </div>

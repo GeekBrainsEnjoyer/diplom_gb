@@ -1,5 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
+
+from comments.forms import CommentForm
+from comments.models import Comment
 from .models import Recipe, Category
 from django.db.models import Q
 
@@ -9,8 +12,26 @@ from .forms import RecipeForm
 
 def detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
+    comments = Comment.objects.filter(recipe=recipe).order_by("-pk")
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST or None)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(False)
+            comment.recipe = recipe
+            comment.created_by = request.user
+            comment.save()
+
+            return redirect('recipe:detail', pk=recipe.id)
+
+    else:
+        comment_form = CommentForm()
+
     return render(request, 'recipe/detail.html', {
-        'recipe': recipe})
+        'recipe': recipe,
+        'comment_form': comment_form,
+        'comments': comments})
 
 
 def browse(request):

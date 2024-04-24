@@ -34,4 +34,26 @@
       <a href="{% url 'chat:new' recipe.id %}" class="px-3 py-2 text-lg font-semibold bg-green-700 text-white rounded-xl">Написать автору</a>
     {% endif %}
   </div>
+  <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 border border-gray-300 rounded-xl">
+    <form method="post" action="." class="mt-6">
+      {% csrf_token %}
+
+      {{ comment_form.as_p }}
+
+      <button class="px-3 py-2 text-lg font-semibold bg-green-700 text-white rounded-xl hover:bg-gray-500">Комментировать</button>
+    </form>
+    {% for comment in comments %}
+      <div class="p-2">
+        {# prettier-ignore #}
+        <div class="p-4 flex {% if comment.created_by == request.user %}bg-green-200{% else %}bg-white{% endif %} rounded-xl border border-gray-300">
+        <div>
+          <p class="mb-2">
+            <strong>{{ comment.created_by.username }}</strong> @ {{ comment.created_at }}
+          </p>
+          <p>{{ comment.content }}</p>
+        </div>
+      </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
