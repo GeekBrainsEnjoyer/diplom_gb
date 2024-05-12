@@ -14,11 +14,11 @@ fi
 python manage.py collectstatic
 python manage.py makemigrations
 python manage.py migrate --noinput
-python manage.py fake_users 100
-python manage.py fake_category food
-python manage.py fake_category brew
-python manage.py fake_category drink
-python manage.py fake_recipes 400
+# python manage.py fake_users 100
+# python manage.py fake_category food
+# python manage.py fake_category brew
+# python manage.py fake_category drink
+# python manage.py fake_recipes 400
 
 
 

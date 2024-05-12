@@ -45,7 +45,7 @@ def browse(request):
 
     if query:
         recipe_set = recipe_set.filter(Q(name__icontains=query) | Q(
-            description__icontains=query) | Q(steps__icontains=query))
+            description__icontains=query) | Q(steps__icontains=query) | Q(ingredients__icontains=query))
 
     return render(request, 'recipe/browse.html', {
         'category_set': category_set, 'recipe_set': recipe_set, 'category_id': int(category_id)})
