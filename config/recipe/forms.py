@@ -9,7 +9,7 @@ INPUT_CLASSES = 'w-full py-2 px-7 rounded-xl border border-gray-300'
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ('category', 'name', 'description', 'steps',
+        fields = ('category', 'name', 'description', 'ingredients', 'steps',
                   'cooking_time', 'image')
         widgets = {
             'category':  forms.Select(attrs={
@@ -21,6 +21,10 @@ class RecipeForm(forms.ModelForm):
             }),
             'description': forms.Textarea(attrs={
                 'placeholder': "Опишите рецепт.",
+                'class': INPUT_CLASSES
+            }),
+            'ingredients':  forms.Textarea(attrs={
+                'placeholder': "Введите инградиенты.",
                 'class': INPUT_CLASSES
             }),
             'steps': forms.Textarea(attrs={
